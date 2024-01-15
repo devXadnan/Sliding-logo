@@ -1,0 +1,118 @@
+{%- if section.settings.divider -%}<div class="section--divider">{%- endif -%}
+  <style>
+  @media only screen and (min-width:769px) {
+    #shopify-section-{{ section.id }} .sliding-logo-wrapper {
+      padding-top: 0px;
+      padding-bottom: 0px;
+    }
+  }
+  @media (max-width: 768px) {
+    #shopify-section-{{ section.id }} .sliding-logo-wrapper {
+      padding-top: 0px;
+      padding-bottom: 0px;
+    }
+  }
+  #shopify-section-{{ section.id }} .logo-center-text {
+    color: #000000;
+  }
+ 
+</style>
+
+{{ 'sliding-logos.css' | asset_url | stylesheet_tag }}
+
+<div class="sliding-logo-wrapper">
+  <div class="logo-container marquee">
+    <!-- First set of logos -->
+    <div class="image-holder">
+      {% for block in section.blocks %}
+      <div class="logo-slide">
+        <img src="{{ block.settings.image | img_url: '400x' }}"  alt="{{ image.alt }}"  width="" height="">
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- 2nd set of logos -->
+    <div class="image-holder">
+     {% for block in section.blocks %}
+      <div class="logo-slide">
+        <img src="{{ block.settings.image | img_url: '400x' }}"  alt="{{ image.alt }}"  width="" height="">
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- 3rd set of logos -->
+    <div class="image-holder">
+     {% for block in section.blocks %}
+      <div class="logo-slide">
+        <img src="{{ block.settings.image | img_url: '400x' }}"  alt="{{ image.alt }}" width="" height="">
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+<div class="logo-center-text">
+    <p class="title">{{ section.settings.title }}</p>
+    <p class="desc">{{ section.settings.desc }}</p>
+  </div>
+</div>
+{%- if section.settings.divider -%}</div>{%- endif -%}
+{% schema %}
+{
+  "name": "Sliding Logos",
+  "class": "index-section",
+  "max_blocks": 10,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:sections.logo-list.settings.title.label"
+    },
+    {
+      "type": "textarea",
+      "id": "desc",
+      "label": "Description"
+    },
+    {
+      "type": "checkbox",
+      "id": "divider",
+      "label": "t:sections.logo-list.settings.divider.label",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "logo_image",
+      "name": "Logo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Logo"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sliding Logos",
+      "blocks": [
+        {
+          "type": "logo_image"
+        },
+        {
+          "type": "logo_image"
+        },
+        {
+          "type": "logo_image"
+        },
+        {
+          "type": "logo_image"
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["footer", "header", "custom.popups"]
+  }
+}
+{% endschema %}
